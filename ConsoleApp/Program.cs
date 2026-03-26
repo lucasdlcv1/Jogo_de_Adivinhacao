@@ -29,12 +29,12 @@ if(numeroDigitado == numeroAleatorio)
 
 else if (numeroDigitado > numeroAleatorio)
 {
-    Console.WriteLine("O numero digitado foi maior que o numero aleatorio!")
+    Console.WriteLine("O numero digitado foi maior que o numero aleatorio!");
 }
 
 else
 {
-    Console.WriteLine("O numero digitado foi menor que o numero aleatorio!")
+    Console.WriteLine("O numero digitado foi menor que o numero aleatorio!");
 }
 
 Console.ReadLine();
