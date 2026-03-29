@@ -17,6 +17,10 @@ O jogador tem um número limitado de tentativas para adivinhar o número.
     Médio (intervalo 1 a 50): ≈ 5 tentativas.
     Difícil (intervalo 1 a 100): ≈ 3 tentativas.
 
+2. Implemente uma funcionalidade de Validação de Números Repetidos
+
+O jogador deve ser informado caso o número que está tentando adivinhar já tenha sido informado anteriormente na mesma rodada.
+
 */
 
 
@@ -24,12 +28,13 @@ while(true == true)
 {
 Console.Clear();
 Console.WriteLine("--------------------------------------------");
-Console.WriteLine("Jogo de adivinhacao");
+Console.WriteLine("Jogo de adivinhação");
 Console.WriteLine("--------------------------------------------");
 Console.WriteLine("1 - Fácil - Números de 1 a 20 com 10 tentativas");
 Console.WriteLine("2 - Médio - Números de 1 a 50 com 5 tentativas");
 Console.WriteLine("3 - Difícil - Números de 1 a 100 com 3 tentativas");
 Console.WriteLine("--------------------------------------------");
+
 Console.Write("Selecione um nivel de dificuldade: ");
 string dificuldade = Console.ReadLine();
 
@@ -41,6 +46,7 @@ switch (dificuldade)
         case "1":
         totalTentativas = 10;
         numeroAleatorio = RandomNumberGenerator.GetInt32(1, 21);
+        
         break;
 
         case "2":
@@ -58,8 +64,11 @@ switch (dificuldade)
         break;
     }
 
+int[] entradas=new int[totalTentativas];
+
 while(totalTentativas > 0)
 {
+
 Console.Clear();
 Console.WriteLine("--------------------------------------------");
 Console.WriteLine("Tentativas restantes: " + totalTentativas);
@@ -69,6 +78,28 @@ string strNumeroDigitado = Console.ReadLine();
 
 int numeroDigitado = Convert.ToInt32(strNumeroDigitado);
 
+
+for(int i = 0; i < entradas.Length; i++)
+        {
+            while (numeroDigitado == entradas[i])
+            {
+                Console.WriteLine("Você já digitou esse número.");
+                Console.WriteLine("Digite enter para continuar...");
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("--------------------------------------------");
+                Console.WriteLine("Tentativas restantes: " + totalTentativas);
+                Console.WriteLine("--------------------------------------------");
+                
+                Console.Write("Digite outro numero: ");
+                strNumeroDigitado = Console.ReadLine();
+
+                numeroDigitado = Convert.ToInt32(strNumeroDigitado);
+                continue;
+            }
+        }
+
+entradas[totalTentativas - 1] = numeroDigitado;
 
 if(numeroDigitado == numeroAleatorio)
 {
@@ -94,10 +125,13 @@ totalTentativas--;
 if(totalTentativas == 0)
         {
             Console.WriteLine("Suas tentativas acabaram.");
-            Console.WriteLine("O numero aleatorio era: " + numeroAleatorio + "\n");
-        }
+            Console.WriteLine("\nO numero aleatorio era: " + numeroAleatorio + "\n");
+            Console.WriteLine("Pressione Enter para jogar novamente");
+            Console.ReadLine();
+            break;
 
-Console.WriteLine("Pressione Enter para jogar novamente...");
+        }
+Console.WriteLine("Pressione Enter para continuar...");
 
 Console.ReadLine();
 
