@@ -1,5 +1,7 @@
 # Jogo de Adivinhação
 
+![Jogo rodando no terminal](./.docs/Jogo.gif.gif)
+
 ## Projeto
 
 Desenvolvido durante o curso Back-End da [Academia do Programador](https://www.academiadoprogramador.net) 2026
