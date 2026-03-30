@@ -21,6 +21,24 @@ O jogador tem um número limitado de tentativas para adivinhar o número.
 
 O jogador deve ser informado caso o número que está tentando adivinhar já tenha sido informado anteriormente na mesma rodada.
 
+3. Implemente uma funcionalidade de Pontuação, onde:
+
+O jogador começa com uma pontuação máxima, por exemplo, 1000 pontos.
+A pontuação é calculada com base na proximidade do palpite em relação ao número secreto.
+A cada tentativa errada, o jogador perde pontos de acordo com a distância do número secreto:
+
+    Se a diferença entre o número secreto e o palpite for de 10 ou mais, o jogador perde 100 pontos.
+    Se a diferença for entre 5 e 9, o jogador perde 50 pontos.
+    Se a diferença for entre 1 e 4, o jogador perde 20 pontos.
+
+Quando o jogador acerta o número, sua pontuação final é registrada.
+
+Exemplo:
+1. Número secreto: 50
+2. Palpite do jogador: 30 → diferença de 20 → o jogador perde 100 pontos (de 1000 para 900).
+3. Palpite do jogador: 48 → diferença de 2 → o jogador perde 20 pontos (de 900 para 880).
+4. Palpite do jogador: 50 → acerto → jogo termina com 880 pontos
+
 */
 
 
@@ -40,6 +58,7 @@ string dificuldade = Console.ReadLine();
 
 int numeroAleatorio = 0;
 int totalTentativas = 10;
+int pontuacao = 1000;
 
 switch (dificuldade)
     {
@@ -73,6 +92,8 @@ Console.Clear();
 Console.WriteLine("--------------------------------------------");
 Console.WriteLine("Tentativas restantes: " + totalTentativas);
 Console.WriteLine("--------------------------------------------");
+Console.WriteLine("Sua pontuação é de: " + pontuacao);
+Console.WriteLine("--------------------------------------------");
 Console.Write("Digite um numero: ");
 string strNumeroDigitado = Console.ReadLine();
 
@@ -89,6 +110,8 @@ for(int i = 0; i < entradas.Length; i++)
                 Console.Clear();
                 Console.WriteLine("--------------------------------------------");
                 Console.WriteLine("Tentativas restantes: " + totalTentativas);
+                Console.WriteLine("--------------------------------------------");
+                Console.WriteLine("Sua pontuação é de: " + pontuacao);
                 Console.WriteLine("--------------------------------------------");
                 
                 Console.Write("Digite outro numero: ");
@@ -131,6 +154,20 @@ if(totalTentativas == 0)
             break;
 
         }
+
+if(Math.Abs(numeroDigitado - numeroAleatorio) > 10)
+        {
+            pontuacao = pontuacao - 100;
+        }
+else if(Math.Abs(numeroDigitado - numeroAleatorio) > 5)
+        {
+            pontuacao = pontuacao - 50;
+        }
+        else
+        {
+            pontuacao = pontuacao - 20;
+        }
+
 Console.WriteLine("Pressione Enter para continuar...");
 
 Console.ReadLine();
